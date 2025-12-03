@@ -14,7 +14,7 @@ const { validateProjectName } = require('../utils/fileSystem');
 function getProjectTypePrompt() {
   return {
     type: 'list',
-    name: 'selectedType',
+    name: 'projectType',
     message: 'Select project type:',
     choices: getProjectTypeChoices(),
     pageSize: 10

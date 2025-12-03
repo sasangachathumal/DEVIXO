@@ -49,13 +49,13 @@ async function run() {
 
     // Create the project
     const projectPath = await createProject({
-      projectType: answers.selectedType,
+      projectType: answers.projectType,
       projectName: answers.projectName,
       directory: answers.directory
     });
 
     // Display success message
-    displaySuccessMessage(projectPath, answers.selectedType);
+    displaySuccessMessage(projectPath, answers.projectType);
 
     // Open in IDE if selected
     if (answers.selectedIDE !== 'skip') {
@@ -72,9 +72,9 @@ async function run() {
  */
 function displayBanner() {
   logger.newLine();
-  logger.log('═══════════════════════════════════════════════════', 'bright');
+  logger.log('═══════════════════════════════════════════════════', 'brightBlue');
   logger.log('   Devixo - Quick Project Setup', 'brightCyan');
-  logger.log('═══════════════════════════════════════════════════', 'bright');
+  logger.log('═══════════════════════════════════════════════════', 'brightBlue');
   logger.newLine();
 }
 
@@ -86,9 +86,9 @@ async function getUserInputs() {
   const defaultDirectory = process.cwd();
 
   // Get project type
-  const { selectedType } = await inquirer.prompt([getProjectTypePrompt()]);
+  const { projectType } = await inquirer.prompt([getProjectTypePrompt()]);
   
-  const config = getProjectType(selectedType);
+  const config = getProjectType(projectType);
   logger.success(`Selected: ${config.name}`);
   logger.newLine();
 
@@ -102,7 +102,7 @@ async function getUserInputs() {
   const { selectedIDE } = await inquirer.prompt([getIDEPrompt()]);
 
   return {
-    selectedType,
+    projectType,
     projectName,
     directory,
     selectedIDE
